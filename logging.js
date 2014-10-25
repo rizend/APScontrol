@@ -1,6 +1,10 @@
 var net = require("net");
 var fs = require("fs");
-fs.unlinkSync("./log.socket")
+try {
+	fs.unlinkSync("./log.socket")
+} catch(e) {
+	//oh no, the socket was already cleaned.
+}
 function setStream(log) {
 	var notesServer = net.createServer(function(c) { //'connection' listener
 		c.on("data", function(d) {
@@ -12,5 +16,4 @@ function setStream(log) {
 		console.log('server bound');
 	});
 }
-setStream({write:function(d) {console.log(""+d)}});
 exports.setStream=setStream;
