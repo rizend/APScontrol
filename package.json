@@ -1,0 +1,23 @@
+{
+  "name": "APScontrol",
+  "version": "0.0.1",
+  "description": "APS network controll software",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"good!\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "NA"
+  },
+  "keywords": [
+    "control",
+    "remote",
+    "client-server"
+  ],
+  "author": "Roy Veatch",
+  "license": "Private",
+  "dependencies": {
+    "node-apt-get": "^0.1.1"
+  }
+}
