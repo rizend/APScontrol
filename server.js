@@ -11,7 +11,7 @@ var server = tls.createServer(options, function(c) {
 	var state=0;
 	var id={};
 	c.setEncoding('utf8');
-	c.on("data". function(d) {
+	c.on("data", function(d) {
 		switch(state) {
 		case 0:
 			if(d.substr(0,2)==="0:") {
