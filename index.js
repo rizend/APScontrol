@@ -15,7 +15,7 @@ function main() {
 function connect(name) {
 	var c = tls.connect({
 			ca: [ fs.readFileSync("./certs/cert.pem") ],
-			host:"local.goxht.ml",//use puppet. when in production
+			host:"puppet.goxht.ml",//use puppet. when in production
 			port:4443 },
 			function() {
 		console.log("connected!");
