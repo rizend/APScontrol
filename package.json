@@ -19,6 +19,6 @@
   "license": "Private",
   "dependencies": {
     "node-apt-get": "^0.1.1",
-    "service-manager": "~0.2.0"
+    "strong-service-install": "~1.0.0"
   }
 }
