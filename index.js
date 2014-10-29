@@ -8,13 +8,14 @@ function main() {
 	fs.readFile("/etc/hostname", function(err, data) {
 		if(err)
 			throw err;
-		connect((""+data).trim());
+		else
+			connect((""+data).trim());
 	});
 }
 function connect(name) {
 	var c = tls.connect({
 			ca: [ fs.readFileSync("./certs/cert.pem") ],
-			host:"puppet.goxht.ml",
+			host:"local.goxht.ml",//use puppet. when in production
 			port:4443 },
 			function() {
 		console.log("connected!");
@@ -22,7 +23,16 @@ function connect(name) {
 		logger.setStream(c);
 	});
 	c.on("end", function(a) {
-		throw "wah, disconnected!"
+		console.log("wah, disconnected!");
+		var t = setTimeout(function() {
+			main();
+		},8192);
+	});
+	c.on("error", function(e) {
+		console.log("Wah, connection failed!");
+		var t = setTimeout(function() {
+			main();
+		},8192);
 	});
 	c.setEncoding('utf8');
 	c.on("data", function(d) {
@@ -31,9 +41,9 @@ function connect(name) {
 			eval(d.substr(1));
 			break;
 		case "c":
-			exec(d.substr(0,1), function(err, stdout, stderr) {
-				c.write("stdout:[["+stdout+"]]");
-				c.write("stderr:[["+stderr+"]]");
+			exec(d.substr(1), function(err, stdout, stderr) {
+				//c.write("stdout:[["+stdout+"]]");
+				//c.write("stderr:[["+stderr+"]]");
 			});
 			break;
 		}
